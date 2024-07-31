@@ -1,0 +1,15 @@
+{
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "string.h": "c",
+        "gccore.h": "c",
+        "jpgogc.h": "c",
+        "winsock.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "ogcsys.h": "c",
+        "malloc.h": "c",
+        "globals.h": "c",
+        "wpad.h": "c"
+    }
+}
