@@ -10,6 +10,7 @@
         "ogcsys.h": "c",
         "malloc.h": "c",
         "globals.h": "c",
-        "wpad.h": "c"
+        "wpad.h": "c",
+        "game.h": "c"
     }
 }

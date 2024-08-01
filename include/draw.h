@@ -11,19 +11,7 @@
 #include <jpeg/jpgogc.h>
 
 #include "game.h"
-
-#define NUM_TARGETS 40  //Accounts for a gap in between each of the targets, 
-#define NUM_TARGET_ROWS 3
-#define TARGET_OFFSET 5
-
-static const int TARGET_L = 15;
-static const int TARGET_H = 10;
-
-typedef struct{
-    int health;
-    int x;
-    int y;
-}Target;
+#include "globals.h"
 
 void DrawHLine (int x1, int x2, int y, int color);
 
@@ -35,9 +23,9 @@ void draw_target(Target* target);
 
 void draw_targets (Target targets[NUM_TARGET_ROWS][NUM_TARGETS]);
 
-void draw_ball (Ball* ball);
+bool draw_ball (Ball* ball, Paddle* paddle);
 
-void draw_balls (Ball balls[1]);
+bool draw_balls (Ball balls[1], Paddle* paddle);
 
 void clear_screen(u32 color);
 

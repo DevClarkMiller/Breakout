@@ -29,14 +29,13 @@ void init_game(){
 		for(int j = 0; j < NUM_TARGETS; j++){
 			int x = (j * TARGET_L);
 			int y = (i * TARGET_H);	
-			Target target = {1, x, y};	//Has a set health of 1
+			Target target = {1, x, y, true};	//Has a set health of 1
 			targets[i][j] = target;
 		}
 	}
 
-
 	//2. Init each ball
-	balls[0] = (Ball){-1, 1, 5, 200, 300, 1};
+	balls[0] = (Ball){-1, 1, 5, 350, 300, 1};
 }
 
 void Initialise() {
@@ -62,7 +61,7 @@ int main() {
 	int cursor_x = 300;
 
 	//Spawn it at the bottom of screen with a bit of offset
-	Paddle paddle = {15, 5, cursor_x, SCRN_Y - 25, 15};
+	Paddle paddle = {25, 5, cursor_x, SCRN_Y - 25, 15};
 	
     while(1) {
 		WPAD_ScanPads();
@@ -76,7 +75,6 @@ int main() {
 
 			if(gcButtonsDown & PAD_BUTTON_START){	//Ends game loop
 				GAME_OVER = true;
-				break;
 			}
 
 			if (PAD_StickX(0) > 18) {
@@ -94,7 +92,28 @@ int main() {
 			//The breakable boxes
 			draw_targets(targets);
 
-			draw_balls(balls);
+			Ball* first_ball = &balls[0];
+
+			//Check for collision with the targets
+			Target* col_target = check_ball_collisions(balls, targets);
+			//If returned target wasn't a null pointer
+			if(col_target){
+				if(col_target->health > 0)
+					col_target->health -= 1;
+				
+				if(col_target->health <= 0){
+					col_target->col_on = false;
+				}
+
+				//Makes ball bounce off if targets collision is on
+				if(col_target->col_on){
+					first_ball->y_pos = -first_ball->y_pos;
+				}
+			}
+
+			if (!draw_balls(balls, &paddle)){
+				GAME_OVER = true;
+			}
 			
 			VIDEO_WaitVSync();
 		}else{

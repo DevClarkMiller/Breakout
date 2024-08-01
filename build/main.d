@@ -65,7 +65,8 @@ main.o: C:/projects/homebrew/Breakout/source/main.c \
  C:/projects/homebrew/Breakout/include/globals.h \
  C:/projects/homebrew/Breakout/include/game.h \
  C:/projects/homebrew/Breakout/include/draw.h \
- C:/projects/homebrew/Breakout/include/game.h
+ C:/projects/homebrew/Breakout/include/game.h \
+ C:/projects/homebrew/Breakout/include/globals.h
 C:/devkitPro/libogc/include/ogcsys.h:
 C:/devkitPro/libogc/include/gccore.h:
 C:/devkitPro/libogc/include/ogc/dsp.h:
@@ -133,3 +134,4 @@ C:/projects/homebrew/Breakout/include/globals.h:
 C:/projects/homebrew/Breakout/include/game.h:
 C:/projects/homebrew/Breakout/include/draw.h:
 C:/projects/homebrew/Breakout/include/game.h:
+C:/projects/homebrew/Breakout/include/globals.h:

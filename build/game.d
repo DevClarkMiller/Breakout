@@ -1,6 +1,6 @@
-draw.o: C:/projects/homebrew/Breakout/source/draw.c \
- C:/projects/homebrew/Breakout/include/draw.h \
- C:/devkitPro/libogc/include/ogcsys.h \
+game.o: C:/projects/homebrew/Breakout/source/game.c \
+ C:/projects/homebrew/Breakout/include/game.h \
+ C:/projects/homebrew/Breakout/include/globals.h \
  C:/devkitPro/libogc/include/gccore.h \
  C:/devkitPro/libogc/include/ogc/dsp.h \
  C:/devkitPro/libogc/include/gctypes.h \
@@ -54,20 +54,9 @@ draw.o: C:/projects/homebrew/Breakout/source/draw.c \
  C:/devkitPro/libogc/include/ogc/usbstorage.h \
  C:/devkitPro/libogc/include/ogc/mutex.h \
  C:/devkitPro/libogc/include/ogc/system.h \
- C:/devkitPro/libogc/include/ogc/wiilaunch.h \
- C:/devkitPro/libogc/include/wiiuse/wpad.h \
- C:/devkitPro/libogc/include/wiiuse/wiiuse.h \
- C:/devkitPro/libogc/include/bte/bte.h \
- C:/devkitPro/libogc/include/bte/bd_addr.h \
- C:/devkitPro/libogc/include/jpeg/jpgogc.h \
- C:/devkitPro/libogc/include/jpeg/jpeglib.h \
- C:/devkitPro/libogc/include/jpeg/jconfig.h \
- C:/devkitPro/libogc/include/jpeg/jmorecfg.h \
- C:/projects/homebrew/Breakout/include/game.h \
- C:/projects/homebrew/Breakout/include/globals.h \
- C:/projects/homebrew/Breakout/include/globals.h
-C:/projects/homebrew/Breakout/include/draw.h:
-C:/devkitPro/libogc/include/ogcsys.h:
+ C:/devkitPro/libogc/include/ogc/wiilaunch.h
+C:/projects/homebrew/Breakout/include/game.h:
+C:/projects/homebrew/Breakout/include/globals.h:
 C:/devkitPro/libogc/include/gccore.h:
 C:/devkitPro/libogc/include/ogc/dsp.h:
 C:/devkitPro/libogc/include/gctypes.h:
@@ -122,14 +111,3 @@ C:/devkitPro/libogc/include/ogc/usbstorage.h:
 C:/devkitPro/libogc/include/ogc/mutex.h:
 C:/devkitPro/libogc/include/ogc/system.h:
 C:/devkitPro/libogc/include/ogc/wiilaunch.h:
-C:/devkitPro/libogc/include/wiiuse/wpad.h:
-C:/devkitPro/libogc/include/wiiuse/wiiuse.h:
-C:/devkitPro/libogc/include/bte/bte.h:
-C:/devkitPro/libogc/include/bte/bd_addr.h:
-C:/devkitPro/libogc/include/jpeg/jpgogc.h:
-C:/devkitPro/libogc/include/jpeg/jpeglib.h:
-C:/devkitPro/libogc/include/jpeg/jconfig.h:
-C:/devkitPro/libogc/include/jpeg/jmorecfg.h:
-C:/projects/homebrew/Breakout/include/game.h:
-C:/projects/homebrew/Breakout/include/globals.h:
-C:/projects/homebrew/Breakout/include/globals.h:
