@@ -11,7 +11,6 @@
 #include <jpeg/jpgogc.h>
 
 #include "game.h"
-#include "globals.h"
 
 void DrawHLine (int x1, int x2, int y, int color);
 
@@ -23,9 +22,7 @@ void draw_target(Target* target);
 
 void draw_targets (Target targets[NUM_TARGET_ROWS][NUM_TARGETS]);
 
-bool draw_ball (Ball* ball, Paddle* paddle);
-
-bool draw_balls (Ball balls[1], Paddle* paddle);
+void draw_balls (Ball balls[1]);
 
 void clear_screen(u32 color);
 

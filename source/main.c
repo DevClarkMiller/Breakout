@@ -1,15 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <malloc.h>
-#include <ogcsys.h>
-#include <gccore.h>
-#include <wiiuse/wpad.h>
-#include <jpeg/jpgogc.h>
-
-#include "globals.h"
-#include "game.h"
 #include "draw.h"
+#include "move.h"
+#include "game.h"
 
 extern char picdata[];
 extern int piclength;
@@ -86,34 +77,17 @@ int main() {
 
 			paddle.x = cursor_x;
 
+			//For now if the ball hits the bottom, the game just ends
+			if (!move_balls(balls, &paddle))
+				GAME_OVER = true;
+
 			//Your paddle
 			DrawBox(paddle.x, paddle.y, paddle.x + paddle.l, paddle.y + paddle.h, COLOR_WHITE);
 
 			//The breakable boxes
 			draw_targets(targets);
 
-			Ball* first_ball = &balls[0];
-
-			//Check for collision with the targets
-			Target* col_target = check_ball_collisions(balls, targets);
-			//If returned target wasn't a null pointer
-			if(col_target){
-				if(col_target->health > 0)
-					col_target->health -= 1;
-				
-				if(col_target->health <= 0){
-					col_target->col_on = false;
-				}
-
-				//Makes ball bounce off if targets collision is on
-				if(col_target->col_on){
-					first_ball->y_pos = -first_ball->y_pos;
-				}
-			}
-
-			if (!draw_balls(balls, &paddle)){
-				GAME_OVER = true;
-			}
+			draw_balls(balls);
 			
 			VIDEO_WaitVSync();
 		}else{
