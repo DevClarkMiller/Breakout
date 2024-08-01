@@ -14,15 +14,17 @@
 static const int TARGET_L = 15;
 static const int TARGET_H = 10;
 
-typedef struct{
+struct PADDLE{
 	int l;	//Length
 	int h;	//Height
 	int x;
 	int y;
 	int speed;
-}Paddle;
+};
 
-typedef struct{
+typedef struct PADDLE Paddle;
+
+struct BALL{
 	int x_pos;
 	int y_pos;
 	int size;
@@ -30,22 +32,28 @@ typedef struct{
 	int y;
 	int speed;
 	int color;
-}Ball;
+};
 
-typedef struct{
+typedef struct BALL Ball;
+
+struct TARGET{
     int health;
     int x;
     int y;
 	bool col_on;
-}Target;
+};
 
-typedef struct{
+typedef struct TARGET Target;
+
+struct COORD{
 	int x;
 	int y;
-}Coord;
+};
+
+typedef struct COORD Coord;
 
 bool check_ball_collision(Ball* ball, Target* target);
 
-void check_ball_collisions(Ball balls[1], Target targets[NUM_TARGET_ROWS][NUM_TARGETS]);
+void check_ball_collisions(node_t* ball_node, node_t* target_head);
 
 #endif

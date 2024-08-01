@@ -28,15 +28,18 @@ bool check_ball_collision(Ball* ball, Target* target) {
     return collision_x && collision_y;
 }
 
-//TODO: CHECK ONLY NEAR TARGETS FOR A COLLISION
-void check_ball_collisions(Ball balls[1], Target targets[NUM_TARGET_ROWS][NUM_TARGETS]){
-    //Check for each ball
-    for(int b = 0; b < 1; b++){
-        for(int i = 0; i < NUM_TARGET_ROWS; i++){
+// Recursively checks over all the balls and targets for collisions
+// TODO: CHECK ONLY NEAR TARGETS FOR A COLLISION
+void check_ball_collisions(node_t* ball_node, node_t* target_head){
+    if(ball_node == NULL) { return; }   //Base case
+    Ball* ball = (Ball*)ball_node->data;
+
+    for(int i = 0; i < NUM_TARGET_ROWS; i++){
+        node_t* row_head = get_nth(target_head, i);
+        if(row_head != NULL){
             for(int j = 0; j < NUM_TARGETS; j++){
-                Target* target = &targets[i][j];
+                Target* target = (Target*)get_nth(row_head, j)->data;
                 if(target->col_on){
-                    Ball* ball = &balls[b];
                     if(check_ball_collision(ball, target)){
                         handle_col(ball, target);
                     }
@@ -44,4 +47,7 @@ void check_ball_collisions(Ball balls[1], Target targets[NUM_TARGET_ROWS][NUM_TA
             }
         }
     }
+
+    if(ball_node->next != NULL)
+        check_ball_collisions(ball_node->next, target_head);
 }

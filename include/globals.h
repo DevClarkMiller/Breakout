@@ -10,6 +10,8 @@
 #include <wiiuse/wpad.h>
 #include <jpeg/jpgogc.h>
 
+#include "linked_list.h"
+
 // External declarations
 extern u32 *xfb;
 extern GXRModeObj *rmode;

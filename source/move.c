@@ -44,13 +44,17 @@ bool move_ball(Ball* ball, Paddle* paddle){
     return true;
 }
 
-bool move_balls(Ball balls[1], Paddle* paddle){
-    for(int i = 0; i < 1; i++){
-        Ball* ball = &balls[i];
-        if(!move_ball(ball, paddle))
-            return false;
-    }
-    return true;
+bool move_balls(node_t* ball_node, Paddle* paddle){
+    if(ball_node == NULL){ return false; }
+
+    Ball* ball = ball_node->data;
+    if(!move_ball(ball, paddle))
+        return false;
+
+    if(ball_node->next == NULL)
+        return true;
+
+    return move_balls(ball_node->next, paddle);
 }
 
 int move_paddle(Paddle* paddle, u32* gcButtonsDown, int cursor_x){

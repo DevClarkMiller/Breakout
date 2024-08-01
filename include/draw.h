@@ -22,9 +22,9 @@ void draw_solid_box(int x1, int y1, int x2, int y2, int color);
 
 void draw_target(Target* target);
 
-void draw_targets (Target targets[NUM_TARGET_ROWS][NUM_TARGETS]);
+void draw_targets (node_t* rows_node);
 
-void draw_balls (Ball balls[1]);
+void draw_balls (node_t* balls_head);
 
 void clear_screen(u32 color);
 

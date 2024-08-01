@@ -37,22 +37,29 @@ void draw_target(Target* target){
     draw_solid_box(target->x + TARGET_OFFSET , target->y + TARGET_OFFSET, target->x + TARGET_L, target->y + TARGET_H, color);
 }
 
-//Takes in an array to draw each of the targets in that array
-void draw_targets (Target targets[NUM_TARGET_ROWS][NUM_TARGETS]){
-    for(int i = 0; i < NUM_TARGET_ROWS; i++){
-        for(int j = 0; j < NUM_TARGETS; j++){
-            Target* target = &targets[i][j];
-            if(target->col_on)
-                draw_target(target);
-        }
+//Recursively iterates over each of the rows in the 2d list
+void draw_targets (node_t* rows_node){
+    if(rows_node == NULL) { return; }
+    node_t* row = (node_t*)rows_node->data; //Casts void pointer to a node pointer
+
+    //Then simple loop to avoid excessive recursion
+    for(int j = 0; j < NUM_TARGETS; j++){
+        Target* target = (Target*)get_nth(row, j)->data;    //Gets the current target from the column node
+        if(target->col_on)
+            draw_target(target);
     }
+
+    if(rows_node->next != NULL)
+        draw_targets(rows_node->next);
 }
 
-void draw_balls (Ball balls[1]){
-    for(int i = 0; i < 1; i++){
-        Ball* ball = &balls[i];
+void draw_balls(node_t* balls_head) {
+    node_t* temp = balls_head;
+
+    while(temp != NULL && temp->data != NULL){
+        Ball* ball = (Ball*)(temp->data);
         draw_solid_box(ball->x, ball->y, ball->x + ball->size, ball->y + ball->size, ball->color);
-    }
+    }   
 }
 
 void clear_screen(u32 color) {
