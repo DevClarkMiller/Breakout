@@ -29,6 +29,7 @@ typedef struct{
 	int x;
 	int y;
 	int speed;
+	int color;
 }Ball;
 
 typedef struct{
@@ -45,6 +46,6 @@ typedef struct{
 
 bool check_ball_collision(Ball* ball, Target* target);
 
-Target* check_ball_collisions(Ball balls[1], Target targets[NUM_TARGET_ROWS][NUM_TARGETS]);
+void check_ball_collisions(Ball balls[1], Target targets[NUM_TARGET_ROWS][NUM_TARGETS]);
 
 #endif

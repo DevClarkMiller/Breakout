@@ -18,6 +18,8 @@ void DrawVLine (int x, int y1, int y2, int color);
 
 void DrawBox (int x1, int y1, int x2, int y2, int color);
 
+void draw_solid_box(int x1, int y1, int x2, int y2, int color);
+
 void draw_target(Target* target);
 
 void draw_targets (Target targets[NUM_TARGET_ROWS][NUM_TARGETS]);

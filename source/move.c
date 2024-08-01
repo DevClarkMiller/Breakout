@@ -21,10 +21,21 @@ bool move_ball(Ball* ball, Paddle* paddle){
         ball->y_pos = -ball->y_pos;
 
     //Checks for collision with paddle
-    if((ball->y >= paddle->y) && (ball->y <= paddle->y + paddle->h)){
-        if((ball->x <= paddle->x + paddle->l) && (ball->x >= paddle->x)){
-            ball->y_pos = -ball->y_pos;
-        }
+    bool col_y = (ball->y >= paddle->y) && (ball->y <= paddle->y + paddle->h);
+    bool col_x = (ball->x <= paddle->x + paddle->l) && (ball->x >= paddle->x);
+
+    if(col_x && col_y){
+        ball->y_pos = -ball->y_pos;
+
+        //Get the x pos of the collision, then adjust the x_pos of the ball to make it bounce in the direction
+        //of the side of the paddle it collided with
+
+        int paddle_half_x = (paddle->x) + (paddle->l / 2);
+
+        if(ball->x < paddle_half_x)
+            ball->x_pos = -1;    //Forces it to travel in a negative direction
+        else
+            ball->x_pos = 1;     //Forces it to travel in a positive direction
     }
 
     ball->x += ball->x_pos;
@@ -41,3 +52,20 @@ bool move_balls(Ball balls[1], Paddle* paddle){
     }
     return true;
 }
+
+int move_paddle(Paddle* paddle, u32* gcButtonsDown, int cursor_x){
+    if(*(gcButtonsDown) & PAD_BUTTON_START)	//Ends game loop
+		GAME_OVER = true;
+    
+
+    if (PAD_StickX(0) > 18) 
+        cursor_x++;
+    
+    if (PAD_StickX(0) < -18) 
+        cursor_x--;
+    
+    paddle->h = cursor_x;
+
+    return cursor_x;
+}
+

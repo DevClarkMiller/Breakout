@@ -20,13 +20,15 @@ void init_game(){
 		for(int j = 0; j < NUM_TARGETS; j++){
 			int x = (j * TARGET_L);
 			int y = (i * TARGET_H);	
-			Target target = {1, x, y, true};	//Has a set health of 1
+			Target target = {2, x, y, true};	//Has a set health of 2
 			targets[i][j] = target;
 		}
 	}
 
 	//2. Init each ball
-	balls[0] = (Ball){-1, 1, 5, 350, 300, 1};
+	for(int i = 0; i < 1; i++){
+		balls[i] = (Ball){-1, 1, 5, 350, 300, 1, COLOR_BLUE};
+	}
 }
 
 void Initialise() {
@@ -52,7 +54,7 @@ int main() {
 	int cursor_x = 300;
 
 	//Spawn it at the bottom of screen with a bit of offset
-	Paddle paddle = {25, 5, cursor_x, SCRN_Y - 25, 15};
+	Paddle paddle = {25, 5, cursor_x, SCRN_Y - 25, 2};
 	
     while(1) {
 		WPAD_ScanPads();
@@ -69,20 +71,22 @@ int main() {
 			}
 
 			if (PAD_StickX(0) > 18) {
-				cursor_x++;
+				cursor_x += paddle.speed;
 			}
 			if (PAD_StickX(0) < -18) {
-				cursor_x--;
+				cursor_x -= paddle.speed;
 			}
 
 			paddle.x = cursor_x;
+
+			check_ball_collisions(balls, targets);
 
 			//For now if the ball hits the bottom, the game just ends
 			if (!move_balls(balls, &paddle))
 				GAME_OVER = true;
 
 			//Your paddle
-			DrawBox(paddle.x, paddle.y, paddle.x + paddle.l, paddle.y + paddle.h, COLOR_WHITE);
+			draw_solid_box(paddle.x, paddle.y, paddle.x + paddle.l, paddle.y + paddle.h, COLOR_WHITE);
 
 			//The breakable boxes
 			draw_targets(targets);

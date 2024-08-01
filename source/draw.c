@@ -18,6 +18,12 @@ void DrawVLine (int x, int y1, int y2, int color) {
         tmpfb[x + (640 * i) / 2] = color;
     }
 }
+
+void draw_solid_box(int x1, int y1, int x2, int y2, int color) {
+    for(int y = y1; y < y2; y++)
+        DrawHLine (x1, x2, y, color);
+}
+
 void DrawBox (int x1, int y1, int x2, int y2, int color) {
     DrawHLine (x1, x2, y1, color);
     DrawHLine (x1, x2, y2, color);
@@ -27,23 +33,25 @@ void DrawBox (int x1, int y1, int x2, int y2, int color) {
 
 //Takes in a pointer to a target, 
 void draw_target(Target* target){
-    DrawBox(target->x + TARGET_OFFSET , target->y + TARGET_OFFSET, target->x + TARGET_L, target->y + TARGET_H, (target->health == 1) ? COLOR_PURPLE : COLOR_RED);
+    int color = (target->health == 2) ? COLOR_PURPLE : (target->health == 1) ? COLOR_RED : COLOR_BLACK;
+    draw_solid_box(target->x + TARGET_OFFSET , target->y + TARGET_OFFSET, target->x + TARGET_L, target->y + TARGET_H, color);
 }
 
 //Takes in an array to draw each of the targets in that array
 void draw_targets (Target targets[NUM_TARGET_ROWS][NUM_TARGETS]){
     for(int i = 0; i < NUM_TARGET_ROWS; i++){
         for(int j = 0; j < NUM_TARGETS; j++){
-            draw_target(&targets[i][j]);
+            Target* target = &targets[i][j];
+            if(target->col_on)
+                draw_target(target);
         }
     }
 }
 
-
 void draw_balls (Ball balls[1]){
     for(int i = 0; i < 1; i++){
         Ball* ball = &balls[i];
-        DrawBox(ball->x, ball->y, ball->x + ball->size, ball->y + ball->size, COLOR_WHITE);
+        draw_solid_box(ball->x, ball->y, ball->x + ball->size, ball->y + ball->size, ball->color);
     }
 }
 
